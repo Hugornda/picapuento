@@ -1,0 +1,14 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      go: 1.x
+
+  build:
+    commands:
+      - GOOS=linux GOARCH=amd64 go build -o main main.go
+      - zip main.zip main
+artifacts:
+  files:
+    - main.zip
