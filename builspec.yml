@@ -8,6 +8,7 @@ phases:
   build:
     commands:
       - go version
+      - ls -lsa
 artifacts:
   files:
     - '**/*'
