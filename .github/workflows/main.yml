@@ -3,16 +3,21 @@ name: Deploy
 on:
   push:
     branches:
-    - main
+      - main
+
 jobs:
   deply_lambda:
-    runs-on:
-      steps:
-        - uses: actions/checkout@v4
-        - name: Setup Go ${{ matrix.go-version }}
-          uses: actions/setup-go@v5
-          with:
-            go-version: ${{ matrix.go-version }}
-        - name: Display Go version
-          run: go version
+    runs-on: ubuntu-latest  # Specify the runner environment here
+
+    steps:  # Steps should be on the same level as runs-on
+      - uses: actions/checkout@v4
+
+      - name: Setup Go ${{ matrix.go-version }}
+        uses: actions/setup-go@v5
+        with:
+          go-version: ${{ matrix.go-version }}
+
+      - name: Display Go version
+        run: go version
+
     
