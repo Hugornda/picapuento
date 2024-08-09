@@ -7,8 +7,7 @@ phases:
 
   build:
     commands:
-      - GOOS=linux GOARCH=amd64 golang build -o main main.go
-      - zip main.zip main
+      - go version
 artifacts:
   files:
-    - main.zip
+    - '**/*'
