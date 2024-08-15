@@ -17,9 +17,19 @@ jobs:
         with:
           go-version: ${{ matrix.go-version }}
 
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-2
+
       - name: Display Go version
         run: go mod tidy
+
       - name: deploy
         run: |
-          go build ./cmd/picapuento/main.go
-          zip -j deploy ./main.go
+          go build -o bootstrap ./cmd/picapuento/main.go
+          zip -j deploy bootstrap
+          aws lambda update-function-code --function-name=pica-ponto --zip-file=fileb://deploy.zip
+          
