@@ -123,5 +123,6 @@ func getPicaPontoToken() (string, error) {
 }
 
 func main() {
+	utils.DisplayArt()
 	lambda.Start(Picaponto)
 }
