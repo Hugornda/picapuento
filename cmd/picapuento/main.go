@@ -10,7 +10,7 @@ type Request struct {
 	Action string `json:"action"`
 }
 
-func HandleRequest(ctx context.Context, event *Request) (*string, error) {
+func Picapuento(ctx context.Context, event *Request) (*string, error) {
 	if event == nil {
 		return nil, fmt.Errorf("received nil event")
 	}
@@ -20,5 +20,5 @@ func HandleRequest(ctx context.Context, event *Request) (*string, error) {
 }
 
 func main() {
-	lambda.Start(HandleRequest)
+	lambda.Start(Picapuento)
 }
