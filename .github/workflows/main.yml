@@ -31,5 +31,6 @@ jobs:
         run: |
           go build -o bootstrap ./cmd/picapuento/main.go
           zip -j deploy bootstrap
+          aws lambda list-functions --region eu-west-3
           aws lambda update-function-code --function-name=pica-ponto --zip-file=fileb://deploy.zip
           
