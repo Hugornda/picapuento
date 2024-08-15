@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  deply_lambda:
+  deploy-lambda:
     runs-on: ubuntu-latest  # Specify the runner environment here
 
     steps:  # Steps should be on the same level as runs-on
@@ -31,6 +31,5 @@ jobs:
         run: |
           go build -o bootstrap ./cmd/picapuento/main.go
           zip -j deploy bootstrap
-          aws lambda list-functions
-          aws lambda update-function-code --function-name=pica-ponto --zip-file=fileb://deploy.zip --region eu-west-3
+          aws lambda update-function-code --function-name=pica-ponto --zip-file=fileb://deploy.zip --region ${{ secrets.AWS_REGION }}
           
