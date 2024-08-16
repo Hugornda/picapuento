@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"hugornda/picapuento/cmd/picapuento/utils"
 	"io"
+	"log"
 	"net/http"
 	"net/url"
 	"os"
@@ -40,6 +41,7 @@ const (
 	CHECKIN_MOVEMENT  = "Entrada"
 	USERID            = "PICA_PONTO_USER_ID"
 	USER_PASSWORD     = "PICA_PONTO_USER_PASSWORD"
+	CJ_PP_URL         = "https://picaponto.pt/ponto/1228/Crossjoin"
 )
 
 var c http.Client = http.Client{Timeout: time.Duration(1) * time.Minute}
@@ -112,7 +114,7 @@ func ChangeStatus(token, tipoMovimento string) string {
 }
 
 func getPicaPontoToken() (string, error) {
-	resp, err := c.Get("https://picaponto.pt/ponto/1228/Crossjoin")
+	resp, err := c.Get(CJ_PP_URL)
 	if err != nil {
 		fmt.Printf("Error %s", err)
 		return "", fmt.Errorf(err.Error())
@@ -123,6 +125,6 @@ func getPicaPontoToken() (string, error) {
 }
 
 func main() {
-	utils.DisplayArt()
+	log.Printf("Starting Picaponto")
 	lambda.Start(Picaponto)
 }
